@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SpinnerUI(): String {
-    val options = listOf("Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8")
+    val options = listOf("Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12")
     var expendedState by remember { mutableStateOf(false) }
     var selectedOption by remember { mutableStateOf(options[0]) }
     val mContext = LocalContext.current
