@@ -5,6 +5,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nabeel.studentdatacollection.Screen
 import com.nabeel.studentdatacollection.database.RoomDB
+import com.nabeel.studentdatacollection.design.PreviewScreen
 import com.nabeel.studentdatacollection.design.StudentForm
 import com.nabeel.studentdatacollection.design.StudentList
 
@@ -18,6 +19,9 @@ fun Navigation() {
         }
         composable(route = Screen.FormScreen.route) {
             StudentForm(studentDao,navController)
+        }
+        composable(route = Screen.PreviewScreen.route) {
+            PreviewScreen()
         }
     }
 }

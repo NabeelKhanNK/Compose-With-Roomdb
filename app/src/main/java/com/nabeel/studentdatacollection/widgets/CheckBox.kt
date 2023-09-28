@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,7 +22,7 @@ fun CheckBoxUI(scaffoldState: ScaffoldState): String {
         mutableStateOf(listOf("Hindi","English","Maths","Science"))
     }
     val scope = rememberCoroutineScope()
-    val subjectList = remember {
+    val subjectList = rememberSaveable {
         mutableListOf<String>()
     }
 
@@ -32,7 +33,7 @@ fun CheckBoxUI(scaffoldState: ScaffoldState): String {
 //        verticalArrangement = Arrangement.Center
     ) {
         genderList.forEach { checkboxValue ->
-            var selectedState by remember {
+            var selectedState by rememberSaveable {
                 mutableStateOf(false)
             }
             Row(modifier = Modifier

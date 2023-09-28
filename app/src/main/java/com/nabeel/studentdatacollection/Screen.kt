@@ -5,6 +5,7 @@ import androidx.navigation.NavArgs
 sealed class Screen(val route: String) {
     object MainScreen : Screen("main_screen")
     object FormScreen : Screen("detail_screen")
+    object PreviewScreen : Screen("preview_screen")
 
     fun withArgs(vararg args: String): String {
         return buildString {

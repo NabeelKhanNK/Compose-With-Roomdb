@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.nabeel.studentdatacollection.Screen
 import com.nabeel.studentdatacollection.database.dao.StudentDao
 import com.nabeel.studentdatacollection.database.entity.StudentInfo
 import com.nabeel.studentdatacollection.ui.theme.Purple700
@@ -28,7 +30,16 @@ import kotlinx.coroutines.launch
 fun StudentForm(studentDao: StudentDao, navController: NavHostController) {
     val scaffoldState = rememberScaffoldState()
     val mContext = LocalContext.current
-    var name by remember {
+    var name by rememberSaveable {
+        mutableStateOf("")
+    }
+    var gender by rememberSaveable {
+        mutableStateOf("")
+    }
+    var inClass by rememberSaveable {
+        mutableStateOf("")
+    }
+    var subjects by rememberSaveable {
         mutableStateOf("")
     }
 
@@ -69,22 +80,22 @@ fun StudentForm(studentDao: StudentDao, navController: NavHostController) {
                 SpacerUI()
                 Text(text = "Gender")
                 SpacerUI()
-                val gender = RadioButtonUi(scaffoldState)
+                gender = RadioButtonUi(scaffoldState)
                 SpacerUI()
                 Text(text = "Class")
                 SpacerUI()
-                val inClass = SpinnerUI()
+                inClass = SpinnerUI()
                 SpacerUI()
                 Text(text = "Subjects")
                 SpacerUI()
-                val subjects = CheckBoxUI(scaffoldState = scaffoldState)
+                subjects = CheckBoxUI(scaffoldState = scaffoldState)
                 SpacerUI()
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center) {
                     Button(
                         modifier = Modifier.padding(8.dp),
                         onClick = {
-                            val studentData = StudentInfo(0,name,gender,inClass,subjects)
+                            val studentData = StudentInfo(0,name,gender,inClass,subjects, "1")
                             scope.launch {
                                 val id = studentDao.insertStudentInfo(studentData)
                                 var mssg: String  = ""
@@ -94,6 +105,13 @@ fun StudentForm(studentDao: StudentDao, navController: NavHostController) {
                             }
                         }) {
                         Text(text = "Submit")
+                    }
+                    Button(
+                        modifier = Modifier.padding(8.dp),
+                        onClick = {
+                            navController.navigate(Screen.PreviewScreen.route)
+                        }) {
+                        Text(text = "Preview")
                     }
                 }
             }

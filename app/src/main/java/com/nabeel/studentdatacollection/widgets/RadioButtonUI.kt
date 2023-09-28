@@ -7,6 +7,7 @@ import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Alignment.Companion.Start
@@ -22,7 +23,7 @@ fun RadioButtonUi(scaffoldState: ScaffoldState): String
     val genderList by remember {
         mutableStateOf(listOf("Male","Female","Other"))
     }
-    var genderState by remember {
+    var genderState by rememberSaveable {
         mutableStateOf("")
     }
     val scope = rememberCoroutineScope()
